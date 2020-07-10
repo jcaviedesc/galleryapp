@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, StatusBar } from 'react-native'
 import MainNavigation from '../navigation/appNavigation'
+import TabsButtons from '../containers/tabButtonsNavigationContainer'
 
 
 // Styles
@@ -25,6 +26,7 @@ class RootContainer extends Component {
       <View style={styles.applicationView}>
         <StatusBar barStyle='dark-content' backgroundColor='#FFFFFF' />
         <MainNavigation />
+        <TabsButtons />
       </View>
     )
   }
