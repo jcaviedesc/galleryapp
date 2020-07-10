@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   headerButtonText: {
-    color: '#FEA0A8'
+    color: '#FEA0A8',
+    fontWeight: 'bold'
   }
 })
