@@ -4,6 +4,7 @@ import { Colors, Metrics } from '../../themes/'
 export default StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
     backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     paddingTop: 9,

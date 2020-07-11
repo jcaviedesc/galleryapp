@@ -7,7 +7,9 @@
  *
  * @format
  */
-
+import './app/config'
+import DebugConfig from './app/config/DebugConfig'
+import './app/config/ReactotronConfig'
 import React from 'react';
 import RootContainer from './app/containers/RootContainer'
 import { Provider } from 'react-redux'
@@ -20,9 +22,12 @@ export const store = createStore()
 const App = () => {
   return (
     <Provider store={store}>
-      <RootContainer />
+        <RootContainer />
     </Provider>
   );
 };
 
-export default App;
+export default DebugConfig.useReactotron
+  ? console.tron.overlay(App)
+  : App
+

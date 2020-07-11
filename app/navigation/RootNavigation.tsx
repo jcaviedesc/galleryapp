@@ -6,7 +6,7 @@ export let navigationRef = React.createRef();
 
 export function navigate(name:string, params:object) {
   if (isMountedRef.current && navigationRef.current) {
-    navigationRef.current?.navigate(name, params);
+    navigationRef.current.navigate(name, params);
   }
 }
 

@@ -1,6 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import { Map } from 'immutable'
-import Navigation from '../navigation/RootNavigation'
+import { navigate } from '../navigation/RootNavigation'
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -17,7 +17,7 @@ export const INITIAL_STATE = Map({
 
 // request the data from an api
 export const navigateTo = (state, { screen }) => {
-  Navigation.navigate(screen)
+  navigate(screen)
   return state.merge({ screen })
 }
 
