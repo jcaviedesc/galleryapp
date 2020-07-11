@@ -4,7 +4,7 @@ const colors = {
   transparent: 'rgba(0,0,0,0)',
   borderButton: '#F4F7FD',
   inactiveIcon: '#8A97AD',
-  activeIcon: ''
+  activeIcon: '#000000'
 }
 
 export default colors

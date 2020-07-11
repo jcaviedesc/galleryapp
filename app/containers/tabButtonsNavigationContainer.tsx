@@ -1,18 +1,20 @@
 import React from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 import styles from './styles/tabsButtonsStyles'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 import Icon from '../components/icons'
 import { Colors } from '../themes'
+import RouterActions from '../redux/RouterRedux'
 
 export interface Props {
-  activeScreen: string
+  currentScreen: string
 }
 
-const TabsButtons: React.FC<Props> = ({ activeScreen }) => {
-  const isActive = (screen: string): boolean => screen === activeScreen
+const TabsButtons: React.FC<Props> = ({ currentScreen }) => {
+  const isActive = (screen: string): boolean => screen === currentScreen
   const activeButton = (screen: string) => isActive(screen)
-    ? {...styles.button, ...styles.activeButton}
+    ? { ...styles.button, ...styles.activeButton }
     : styles.button
   return (
     <View style={styles.tabsContainer}>
@@ -37,5 +39,16 @@ const TabsButtons: React.FC<Props> = ({ activeScreen }) => {
     </View>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    currentScreen: state.router.get('screen')
+  }
+}
 
-export default TabsButtons;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    navigateTo: (screen) => dispatch(RouterActions.navigateTo(screen))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabsButtons);

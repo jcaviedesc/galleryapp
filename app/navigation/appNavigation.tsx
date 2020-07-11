@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native'
 import ImagesScreen from '../containers/ImagesContainer'
 //headerNextButton 
 import { HeaderButton } from '../components'
+import { navigationRef, isMountedRef } from './RootNavigation';
 import styles from './styles/navigationStyles'
 
 type RootStackParamList = {
@@ -13,8 +14,13 @@ type RootStackParamList = {
 const RootStack = createStackNavigator<RootStackParamList>();
 
 export default function MainNavigator() {
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => (isMountedRef.current = false);
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator
         initialRouteName='ImagesScreen'
         screenOptions={{
