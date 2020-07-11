@@ -10,13 +10,18 @@
 
 import React from 'react';
 import RootContainer from './app/containers/RootContainer'
-declare const global: {HermesInternal: null | {}};
+import { Provider } from 'react-redux'
+import createStore from './app/redux'
+declare const global: { HermesInternal: null | {} };
+
+// create our store
+export const store = createStore()
 
 const App = () => {
   return (
-    <>
-    <RootContainer />
-    </>
+    <Provider store={store}>
+      <RootContainer />
+    </Provider>
   );
 };
 
