@@ -5,7 +5,8 @@ const colors = {
   borderButton: '#F4F7FD',
   inactiveIcon: '#8A97AD',
   activeIcon: '#000000',
-  borderButtonInactive: '#707070'
+  borderButtonInactive: '#707070',
+  takePhotoBackgrounButton: '#CDD4E0'
 }
 
 export default colors
