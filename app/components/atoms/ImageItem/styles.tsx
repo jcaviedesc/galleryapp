@@ -5,7 +5,7 @@ export default StyleSheet.create({
   imageItem: {
     width: (Metrics.screenWidth - 58) / 4,
     height: (Metrics.screenWidth - 58) / 4,
-    borderRadius: 20,
+    borderRadius: 10,
     margin: 3,
     backgroundColor: 'lightgray'
   }

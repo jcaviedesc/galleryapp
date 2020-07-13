@@ -25,7 +25,7 @@ function ImagesStackScreen() {
         component={ImagesScreen}
         options={{
           title: 'Recientes',
-          headerRight: () => <HeaderButton title='Sigiente' onPress={() => { }} />
+          headerRight: () => <HeaderButton title='Sigiente' onPress={() => { }} active />
         }} />
     </ImagesStack.Navigator>
   );
@@ -43,9 +43,11 @@ function CameraStackScreen() {
       <CameraStack.Screen
         name="CameraScreen"
         component={CameraScreen}
-        options={{
-          title: 'Tomar foto',
-          headerRight: () => <HeaderButton title='Sigiente' onPress={() => { }} />
+        options={() => {
+          return {
+            title: 'Tomar foto',
+            headerRight: () => <HeaderButton title='Sigiente' onPress={() => { }} active={false} />
+          }
         }} />
     </CameraStack.Navigator>
   );
@@ -103,7 +105,7 @@ export default function MainNavigator() {
             tabBarLabel: 'photo'
           }}
         />
-         <Tab.Screen
+        <Tab.Screen
           name='VideoStack'
           component={VideoStackScreen}
           options={{
