@@ -1,55 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { Metrics } from '../../../themes'
+import { Metrics, Colors } from '../../../themes'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from '../../icons'
 
 type Props = {
-  refcamera: React.createRef,
-  flashOn: boolean,
-  type?: string
+  refcamera: typeof React.createRef,
 }
-type flashType = "auto" | "on" | "off" | "torch" | undefined
 
-const Camera = ({ refcamera, flashOn = false, type = "front" }: Props) => {
-  const aciveFlash: flashType = flashOn
-    ? RNCamera.Constants.FlashMode.on
-    : RNCamera.Constants.FlashMode.off
-
-  // const takePicture: Function = async () => {
-  //   if (cameraRef.current) {
-  //     const options = { quality: 0.5, base64: true };
-  //     const data = await cameraRef.current.takePictureAsync(options);
-  //     console.log(data.uri);
-  //   }
-  // };
-//   rectOfInterest={{
-//     x: 0, y: 0, width: 480, height: 500
-//   }}
-//   cameraViewDimensions={{
-//   width: 480, height: 500
-// }}
+const Camera = ({ refcamera }: Props) => {
+  const [flashMode, setFlashMode] = useState(RNCamera.Constants.FlashMode.off)
+  const [cameraMode, setCameraMode] = useState(RNCamera.Constants.Type.front)
+  
   return (
     <View style={styles.container}>
       <RNCamera
         ref={refcamera}
         style={styles.preview}
-        type={type}
-        ratio="4:3"
-        flashMode={aciveFlash}
+        type={cameraMode}
+        flashMode={flashMode}
         androidCameraPermissionOptions={{
-        title: 'Permission to use camera',
-        message: 'We need your permission to use your camera',
-        buttonPositive: 'Ok',
-        buttonNegative: 'Cancel',
-      }}
+          title: 'Permission to use camera',
+          message: 'We need your permission to use your camera',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
         androidRecordAudioPermissionOptions={{
-        title: 'Permission to use audio recording',
-        message: 'We need your permission to use your audio',
-        buttonPositive: 'Ok',
-        buttonNegative: 'Cancel',
-      }}
-      />
-    </View>
+          title: 'Permission to use audio recording',
+          message: 'We need your permission to use your audio',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
+      >
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setCameraMode(prevMode => {
+              return prevMode !== RNCamera.Constants.Type.back
+                ? RNCamera.Constants.Type.back
+                : RNCamera.Constants.Type.front
+            })}>
+            <Icon
+              name="change-camera"
+              size={18}
+              color={Colors.backgroundColor} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              ...styles.button,
+              backgroundColor: flashMode === RNCamera.Constants.FlashMode.off ? Colors.backgroundButtonCamera: Colors.flashModeOn
+            }}
+            onPress={() => setFlashMode(flashMode => {
+              return flashMode === RNCamera.Constants.FlashMode.on
+                ? RNCamera.Constants.FlashMode.off
+                : RNCamera.Constants.FlashMode.on
+            })}>
+            <Icon
+              name="flash-off"
+              size={18}
+              color={Colors.backgroundColor} />
+          </TouchableOpacity>
+        </View>
+      </RNCamera>
+    </View >
   );
 }
 
@@ -66,5 +80,20 @@ const styles = StyleSheet.create({
     height: 600,
     justifyContent: 'flex-end',
     alignItems: 'center'
+  },
+  buttons: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingHorizontal: 10
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: 'rgba(0,0,0,0.5)'
   }
 });

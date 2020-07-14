@@ -6,7 +6,9 @@ const colors = {
   inactiveIcon: '#8A97AD',
   activeIcon: '#000000',
   borderButtonInactive: '#707070',
-  takePhotoBackgrounButton: '#CDD4E0'
+  takePhotoBackgrounButton: '#CDD4E0',
+  flashModeOn: '#FEA0A8',
+  backgroundButtonCamera: 'rgba(0,0,0,0.5)'
 }
 
 export default colors
